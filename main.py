@@ -6,7 +6,8 @@ import psycopg2
 
 
 
-# FINDING UMLS SYNONYMS:
+# FINDING UMLS SYNONYMS (starting with a given CUI - need to find CUI first):
+# can find CUI with `str like 'whatever was entered'`
 
 #select distinct str from MRCONSO where CUI = "C0242379" and SUPPRESS = 'N' limit 30;
 
