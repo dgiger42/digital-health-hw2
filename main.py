@@ -6,6 +6,21 @@ import psycopg2
 
 
 
+# FINDING UMLS SYNONYMS:
+
+#select distinct str from MRCONSO where CUI = "C0242379" and SUPPRESS = 'N' limit 30;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
