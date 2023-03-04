@@ -21,12 +21,21 @@ cursor = conn.cursor()
 #  SELECT * FROM pg_catalog.pg_tables;
 # """)
 
+# cursor.execute("""
+# SELECT subject_id, hadm_id, text 
+# FROM mimiciii.noteevents 
+# WHERE category = 'Discharge summary'
+# LIMIT 10
+# """)
+
 cursor.execute("""
-SELECT subject_id, hadm_id, text 
+SELECT * 
 FROM mimiciii.noteevents 
 WHERE category = 'Discharge summary'
 LIMIT 10
 """)
+               
+
 
 
 
