@@ -22,7 +22,10 @@ cursor = conn.cursor()
 # """)
 
 cursor.execute("""
- SELECT * FROM pg_catalog.pg_tables;
+SELECT subject_id, hadm_id, text 
+FROM mimiciii.noteevents 
+WHERE category = 'Discharge summary'
+LIMIT 10
 """)
 
 
@@ -35,6 +38,7 @@ results = cursor.fetchall()
 print('results')
 for row in results:
     print(row)
+    print("\n\n")
 
 # print(f'{results = }')
 
