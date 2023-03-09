@@ -1,6 +1,6 @@
 import psycopg2
 import json
-
+import urllib.request
 
 
 
@@ -102,4 +102,10 @@ with open(dataset_file) as f:
 # all_row_dicts_json = json.dumps(all_row_dicts)
 
 
+query_url = 'http://localhost:8983/solr/mimic_notes/select?indent=true&q.op=OR&q=row_id%3A%5B173%20TO%20176%5D&useParams=&wt=json'
+response_json = urllib.request.urlopen(query_url).read()
+response_dict = json.loads(response_json)['response']
+
 print(42)
+
+
