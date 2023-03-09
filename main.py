@@ -89,7 +89,11 @@ for row in results:
     all_row_dicts.append(row_dict)
 
 
-all_row_dicts_json = json.dumps(all_row_dicts)
+dataset_file = 'MIMIC_notes.json'
+with open(dataset_file, 'w') as f:
+    json.dump(all_row_dicts, f)
+
+# all_row_dicts_json = json.dumps(all_row_dicts)
 
 
 # Close the cursor and connection
