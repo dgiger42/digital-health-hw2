@@ -1,5 +1,5 @@
 import psycopg2
-
+import json
 
 
 
@@ -43,28 +43,53 @@ cursor = conn.cursor()
 #  SELECT * FROM pg_catalog.pg_tables;
 # """)
 
+
+def get_discharge_summaries():
+    # get column names
+
+
+    # should probably limit fields eventually...
+    # NEED TO REMOVE LIMIT
+    cursor.execute(f"""
+    SELECT {','.join(col_names)}
+    FROM mimiciii.noteevents 
+    WHERE category = 'Discharge summary'
+    LIMIT 5
+    """)
+
+
 cursor.execute("""
-SELECT text 
-FROM mimiciii.noteevents 
-WHERE category = 'Discharge summary'
-LIMIT 10
+SELECT column_name FROM information_schema.columns where table_name = 'noteevents'
 """)
 
+res1 = cursor.fetchall()
+col_names = [x[0] for x in res1]
 
+get_discharge_summaries()
 
 # Fetch the results
 results = cursor.fetchall()
+all_row_dicts = []
 
 # Print the results
-print('results')
+# print('results')
 for row in results:
-    print('#' * 100)
-    print('#' * 100)
-    print('#' * 100)
-    print('\n\n')
-    # print(row)
-    print(row[0])
-    print("\n\n\n\n")
+    # print('#' * 100)
+    # print('#' * 100)
+    # print('#' * 100)
+    # print('\n\n')
+    # # print(row)
+    # print(row[0])
+    # print("\n\n\n\n")
+
+    row_dict = {name: val for (name, val) in zip(col_names, row)}
+
+    row_dict['chartdate'] = str(row_dict['chartdate'])
+    x = 42
+    all_row_dicts.append(row_dict)
+
+
+all_row_dicts_json = json.dumps(all_row_dicts)
 
 
 # Close the cursor and connection
