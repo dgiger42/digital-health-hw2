@@ -88,15 +88,18 @@ for row in results:
     x = 42
     all_row_dicts.append(row_dict)
 
-
-dataset_file = 'MIMIC_notes.json'
-with open(dataset_file, 'w') as f:
-    json.dump(all_row_dicts, f)
-
-# all_row_dicts_json = json.dumps(all_row_dicts)
-
-
 # Close the cursor and connection
 cursor.close()
 conn.close()
-# breakpoint()
+
+
+dataset_file = 'MIMIC_notes.json'
+with open(dataset_file, 'w') as f:
+    json.dump(all_row_dicts, f, indent=4)
+
+with open(dataset_file) as f:
+    all_row_dicts = json.load(f)
+# all_row_dicts_json = json.dumps(all_row_dicts)
+
+
+print(42)
